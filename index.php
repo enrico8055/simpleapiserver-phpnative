@@ -1,5 +1,5 @@
 <?php
-    $conn = new mysqli("remotemysql.com:3306", "Kc4FegeTMa", "ccDoPsf7B1", "Kc4FegeTMa"); //connect ke database
+    $conn = new mysqli("remotemysql.com:3306", "Kc4FegeTMa", "RR7CK8JY96", "Kc4FegeTMa"); //connect ke database
 
     if(isset($_GET['action']) && $_GET['action'] == 1 && isset($_GET['tanggal'])){ //UNTUK AMBIL DATA DARI DB
         $tanggal = $_GET['tanggal'];
