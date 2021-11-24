@@ -257,7 +257,8 @@
                     'hargamasuk' => $row['hargamasuk'],
                     'jumlahjual' => $row['jumlahjual'],
                     'hargajual' => $row['hargajual'],
-                    'ongkir' => $row['ongkir']
+                    'ongkir' => $row['ongkir'],
+                    'catatan' > $row['catatan']
                 ));
             };
 
