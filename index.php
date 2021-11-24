@@ -239,6 +239,32 @@
                 array('result' => 'success')
             );
         }
+    }if(isset($_GET['action']) && $_GET['action'] == 13 ){ //UNTUK AMBIL DATA REKAP DARI DB
+        $getData = $conn->query("SELECT * FROM tblRekap order by id desc"); //ambil semua data dari db
+        
+        if($getData -> num_rows == 0){
+            echo json_encode(
+                array('result' => 'no data')
+            );
+        }else{
+            $result = array(); //tempat menampung semua data
+
+            while($row = $getData -> fetch_assoc()){ //kita ambil data per baris lalu masukkan ke tempat penampungan
+                array_push($result, array(
+                    'id' => $row['id'],
+                    'tanggal' => $row['tanggal'],
+                    'jumlahmasuk' => $row['jumlahmasuk'],
+                    'hargamasuk' => $row['hargamasuk'],
+                    'jumlahjual' => $row['jumlahjual'],
+                    'hargajual' => $row['hargajual'],
+                    'ongkir' => $row['ongkir']
+                ));
+            };
+
+            echo json_encode( //return/ kembalikan data di penampungan berupa json result
+                array('result' => $result)
+            );
+        }
     }else{ //KALO USER KIRIM PARAMETER GAK JELAS
         echo json_encode(
             array('result' => 'access not permitted')
