@@ -258,7 +258,7 @@
                     'jumlahjual' => $row['jumlahjual'],
                     'hargajual' => $row['hargajual'],
                     'ongkir' => $row['ongkir'],
-                    'catatan' > $row['catatan']
+                    'catatan' => $row['catatan']
                 ));
             };
 
