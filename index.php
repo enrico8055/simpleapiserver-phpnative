@@ -296,18 +296,22 @@
 
         $getData = $conn->query("SELECT * FROM tblRekap where tanggal='".$dateSekarang."'");
         $row = $getData -> fetch_assoc();
-        var_dump($row);
+        if(count($row) < 1){
+            $conn->query("INSERT INTO tblRekap(tanggal, jumlahmasuk, hargamasuk) VALUES ('".$dateSekarang."', ".$jmlBarang.",".$hargaBarang.")");
 
-        $conn->query("INSERT INTO tblRekap(tanggal, jumlahmasuk, hargamasuk) VALUES ('".$dateSekarang."', ".$jmlBarang.",".$hargaBarang.")");
-
-        if($conn -> error != null){ //kalo query nya ada error
-            echo json_encode(
-                array('result' => 'query failed')
-            );
-        }else{ //kalo query berhasil
-            echo json_encode(
-                array('result' => 'success')
-            );
+            if($conn -> error != null){ //kalo query nya ada error
+                echo json_encode(
+                    array('result' => 'query failed')
+                );
+            }else{ //kalo query berhasil
+                echo json_encode(
+                    array('result' => 'success')
+                );
+            }
+        }else{
+                 echo json_encode(
+                    array('result' => 'available')
+                );
         }
     }else{ //KALO USER KIRIM PARAMETER GAK JELAS
         echo json_encode(
