@@ -266,7 +266,7 @@
         $getData = $conn->query("SELECT * FROM tblRinciRekap where id=".$_GET['id']); //ambil semua data dari db
         $getTotal = $conn->query("SELECT (jumlahjual*hargajual)-ongkir as total FROM tblRinciRekap WHERE id=".$_GET['id']);
         
-        if($getData -> num_rows == 0){
+        if($getTotal -> num_rows == 0){
             echo json_encode(
                 array('result' => 'no data')
             );
