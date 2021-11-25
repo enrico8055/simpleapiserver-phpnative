@@ -295,7 +295,7 @@
         $dateSekarang = date("d/m/Y");
 
         $getData = $conn->query("SELECT * FROM tblRekap where tanggal='".$dateSekarang."'");
-        var_dump($getData);
+        var_dump($getData["num_rows"]);
 
         $conn->query("INSERT INTO tblRekap(tanggal, jumlahmasuk, hargamasuk) VALUES ('".$dateSekarang."', ".$jmlBarang.",".$hargaBarang.")");
 
