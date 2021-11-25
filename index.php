@@ -265,16 +265,16 @@
     }else if(isset($_GET['action']) && $_GET['action'] == 14 && isset($_GET['id']) ){ //UNTUK AMBIL DATA REKAP DARI DB
         $getTotal = $conn->query("SELECT (jumlahjual*hargajual)-ongkir FROM tblRinciRekap WHERE id=".$_GET['id']);
         $getData = $conn->query("SELECT * FROM tblRinciRekap where id=".$_GET['id']); //ambil semua data dari db
-        var_dump($getData);
         if($getTotal -> num_rows == 0 || $getData -> num_rows == 0){
             echo json_encode(
                 array('result' => 'no data')
             );
         }else{
             $result = array(); //tempat menampung semua data
-
+            
             while($row = $getData -> fetch_assoc()){ //kita ambil data per baris lalu masukkan ke tempat penampungan
                 $row2 = $getTotal -> fetch_assoc();
+                var_dump($row2);
                 array_push($result, array(
                     'namapembeli' => $row['namapembeli'],
                     'jumlahjual' => $row['jumlahjual'],
