@@ -240,7 +240,7 @@
             );
         }
     }else if(isset($_GET['action']) && $_GET['action'] == 13 ){ //UNTUK AMBIL DATA REKAP DARI DB
-        $getData = $conn->query("SELECT * FROM tblRekap order by id desc limit 30"); //ambil semua data dari db
+        $getData = $conn->query("SELECT * FROM tblKulakan order by id desc"); //ambil semua data dari db
         
         if($getData -> num_rows == 0){
             echo json_encode(
@@ -252,9 +252,9 @@
             while($row = $getData -> fetch_assoc()){ //kita ambil data per baris lalu masukkan ke tempat penampungan
                 array_push($result, array(
                     'id' => $row['id'],
-                    'tanggal' => $row['tanggal'],
-                    'jumlahmasuk' => $row['jumlahmasuk'],
-                    'hargamasuk' => $row['hargamasuk']
+                    'jumlahbarang' => $row['jumlahbarang'],
+                    'hargabarang' => $row['hargabarang'],
+                    'tanggal' => $row['tanggal']
                 ));
             };
 
