@@ -294,6 +294,9 @@
         date_default_timezone_set('Asia/Jakarta');
         $dateSekarang = date("d/m/Y");
 
+        $getData = $conn->query("SELECT * FROM tblRekap where tanggal=".$dateSekarang);
+        var_dump($getData == null);
+
         $conn->query("INSERT INTO tblRekap(tanggal, jumlahmasuk, hargamasuk) VALUES ('".$dateSekarang."', ".$jmlBarang.",".$hargaBarang.")");
 
         if($conn -> error != null){ //kalo query nya ada error
