@@ -263,8 +263,7 @@
             );
         }
     }else if(isset($_GET['action']) && $_GET['action'] == 14 && isset($_GET['id']) ){ //UNTUK AMBIL DATA REKAP DARI DB
-        $getTotal = $conn->query("SELECT sum((jumlahjual*hargajual)-ongkir) as total FROM tblRinciRekap WHERE id=".$_GET['id']." group by id");
-        $getData = $conn->query("SELECT * FROM tblRinciRekap where id=".$_GET['id']); //ambil semua data dari db
+        $getData = $conn->query("SELECT * FROM tblPenjualan where id=".$_GET['id']); //ambil semua data dari db
         if($getTotal -> num_rows == 0 || $getData -> num_rows == 0){
             echo json_encode(
                 array('result' => 'no data')
@@ -272,14 +271,13 @@
         }else{
             $result = array(); //tempat menampung semua data
             
-            $row2 = $getTotal -> fetch_assoc();
             while($row = $getData -> fetch_assoc()){ //kita ambil data per baris lalu masukkan ke tempat penampungan
                 array_push($result, array(
                     'namapembeli' => $row['namapembeli'],
                     'jumlahjual' => $row['jumlahjual'],
                     'hargajual' => $row['hargajual'],
-                    'ongkir' => $row['ongkir'],
-                    'total' => $row2['total']
+                    'ongkos' => $row['ongkos'],
+                    'tanggal' => $row2['tanggal']
                 ));
             };
 
