@@ -294,7 +294,7 @@
         date_default_timezone_set('Asia/Jakarta');
         $dateSekarang = date("d/m/Y");
 
-        $getData = $conn->query("SELECT * FROM tblRekap where tanggal=".$dateSekarang);
+        $getData = $conn->query("SELECT * FROM tblRekap where tanggal='".$dateSekarang."'");
         var_dump($getData);
 
         $conn->query("INSERT INTO tblRekap(tanggal, jumlahmasuk, hargamasuk) VALUES ('".$dateSekarang."', ".$jmlBarang.",".$hargaBarang.")");
