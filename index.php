@@ -272,8 +272,8 @@
         }else{
             $result = array(); //tempat menampung semua data
             
+            $row2 = $getTotal -> fetch_assoc();
             while($row = $getData -> fetch_assoc()){ //kita ambil data per baris lalu masukkan ke tempat penampungan
-                $row2 = $getTotal -> fetch_assoc();
                 array_push($result, array(
                     'namapembeli' => $row['namapembeli'],
                     'jumlahjual' => $row['jumlahjual'],
