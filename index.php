@@ -277,7 +277,7 @@
                     'jumlahjual' => $row['jumlahjual'],
                     'hargajual' => $row['hargajual'],
                     'ongkos' => $row['ongkos'],
-                    'tanggal' => $row2['tanggal']
+                    'tanggal' => $row['tanggal']
                 ));
             };
 
@@ -319,6 +319,25 @@
         }else{ //kalo query berhasil
             echo json_encode(
                 array('result' => 'success')
+            );
+        }
+    }else if(isset($_GET['action']) && $_GET['action'] == 17 && isset($_GET['id']) ){ //UNTUK AMBIL DATA REKAP DARI DB
+        $getData = $conn->query("SELECT (SELECT sum(jumlahjual*hargajual) - sum(ongkos) FROM tblPenjualan WHERE id = 1121) - (sum(jumlahbarang*hargabarang)) as laba FROM tblKulakan WHERE id = ".$_GET['id']); //ambil semua data dari db
+        if($getData -> num_rows == 0){
+            echo json_encode(
+                array('result' => 'no data')
+            );
+        }else{
+            $result = array(); //tempat menampung semua data
+            
+            while($row = $getData -> fetch_assoc()){ //kita ambil data per baris lalu masukkan ke tempat penampungan
+                array_push($result, array(
+                    'laba' => $row['laba']
+                ));
+            };
+
+            echo json_encode( //return/ kembalikan data di penampungan berupa json result
+                array('result' => $result)
             );
         }
     }else{ //KALO USER KIRIM PARAMETER GAK JELAS
