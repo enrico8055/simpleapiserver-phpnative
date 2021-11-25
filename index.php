@@ -263,7 +263,7 @@
             );
         }
     }else if(isset($_GET['action']) && $_GET['action'] == 14 && isset($_GET['id']) ){ //UNTUK AMBIL DATA REKAP DARI DB
-        $getData = $conn->query("SELECT * FROM tblPenjualan where id=".$_GET['id']); //ambil semua data dari db
+        $getData = $conn->query("SELECT * FROM tblPenjualan where id=".$_GET['id']."order by no desc"); //ambil semua data dari db
         if($getData -> num_rows == 0){
             echo json_encode(
                 array('result' => 'no data')
