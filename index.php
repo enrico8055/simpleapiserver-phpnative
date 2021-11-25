@@ -254,11 +254,30 @@
                     'id' => $row['id'],
                     'tanggal' => $row['tanggal'],
                     'jumlahmasuk' => $row['jumlahmasuk'],
-                    'hargamasuk' => $row['hargamasuk'],
+                    'hargamasuk' => $row['hargamasuk']
+                ));
+            };
+
+            echo json_encode( //return/ kembalikan data di penampungan berupa json result
+                array('result' => $result)
+            );
+        }
+    }else if(isset($_GET['action']) && $_GET['action'] == 14 && isset($_GET['id']) ){ //UNTUK AMBIL DATA REKAP DARI DB
+        $getData = $conn->query("SELECT * FROM tblRinciRekap where id=".$_GET['id']); //ambil semua data dari db
+        
+        if($getData -> num_rows == 0){
+            echo json_encode(
+                array('result' => 'no data')
+            );
+        }else{
+            $result = array(); //tempat menampung semua data
+
+            while($row = $getData -> fetch_assoc()){ //kita ambil data per baris lalu masukkan ke tempat penampungan
+                array_push($result, array(
+                    'namapembeli' => $row['namapembeli'],
                     'jumlahjual' => $row['jumlahjual'],
                     'hargajual' => $row['hargajual'],
-                    'ongkir' => $row['ongkir'],
-                    'catatan' => $row['catatan']
+                    'ongkir' => $row['ongkir']
                 ));
             };
 
