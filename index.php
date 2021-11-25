@@ -287,6 +287,24 @@
                 array('result' => $result)
             );
         }
+    }else if(isset($_GET['action']) && $_GET['action'] == 15 && isset($_GET['jmlBarang']) && isset($_GET['hargaBarang'])){ //UNTUK MEMASUKKAN DATA REKAP KE DB
+        $jmlBarang = $_GET['jmlBarang'];
+        $hargaBarang = $_GET['hargaBarang'];
+        
+        date_default_timezone_set('Asia/Jakarta');
+        $dateSekarang = date("d/m/Y");
+
+        $conn->query("INSERT INTO tblRekap(tanggal, jumlahmasuk, hargamasuk) VALUES ('".$dateSekarang."', ".$jmlBarang.",".$hargaBarang.")");
+
+        if($conn -> error != null){ //kalo query nya ada error
+            echo json_encode(
+                array('result' => 'query failed')
+            );
+        }else{ //kalo query berhasil
+            echo json_encode(
+                array('result' => 'success')
+            );
+        }
     }else{ //KALO USER KIRIM PARAMETER GAK JELAS
         echo json_encode(
             array('result' => 'access not permitted')
