@@ -294,26 +294,17 @@
         date_default_timezone_set('Asia/Jakarta');
         $dateSekarang = date("d/m/Y");
 
-        $getData = $conn->query("SELECT * FROM tblRekap where tanggal='".$dateSekarang."'");
-        $row = $getData -> fetch_assoc();
-        echo(count($row));
-        // if(count($row) < 1){
-        //     $conn->query("INSERT INTO tblRekap(tanggal, jumlahmasuk, hargamasuk) VALUES ('".$dateSekarang."', ".$jmlBarang.",".$hargaBarang.")");
+        $conn->query("INSERT INTO tblRekap(tanggal, jumlahmasuk, hargamasuk) VALUES ('".$dateSekarang."', ".$jmlBarang.",".$hargaBarang.")");
 
-        //     if($conn -> error != null){ //kalo query nya ada error
-        //         echo json_encode(
-        //             array('result' => 'query failed')
-        //         );
-        //     }else{ //kalo query berhasil
-        //         echo json_encode(
-        //             array('result' => 'success')
-        //         );
-        //     }
-        // }else{
-        //          echo json_encode(
-        //             array('result' => 'available')
-        //         );
-        // }
+        if($conn -> error != null){ //kalo query nya ada error
+            echo json_encode(
+                array('result' => 'query failed')
+            );
+        }else{ //kalo query berhasil
+            echo json_encode(
+                array('result' => 'success')
+            );
+        }
     }else{ //KALO USER KIRIM PARAMETER GAK JELAS
         echo json_encode(
             array('result' => 'access not permitted')
