@@ -322,7 +322,7 @@
             );
         }
     }else if(isset($_GET['action']) && $_GET['action'] == 17 && isset($_GET['id']) ){ //UNTUK AMBIL DATA REKAP DARI DB
-        $getData = $conn->query("SELECT (SELECT sum(jumlahjual*hargajual) - sum(ongkos) FROM tblPenjualan WHERE id = 1121) - (sum(jumlahbarang*hargabarang)) as laba FROM tblKulakan WHERE id = ".$_GET['id']); //ambil semua data dari db
+        $getData = $conn->query("SELECT (SELECT sum(jumlahjual*hargajual) - sum(ongkos) FROM tblPenjualan WHERE id = 1121) - (sum(jumlahbarang*hargabarang)) as laba, sum(jumlahbarang) - (SELECT sum(jumlahjual) FROM tblPenjualan WHERE id = 1121) as sisastok FROM tblKulakan WHERE id = ".$_GET['id']); //ambil semua data dari db
         if($getData -> num_rows == 0){
             echo json_encode(
                 array('result' => 'no data')
@@ -332,7 +332,8 @@
             
             while($row = $getData -> fetch_assoc()){ //kita ambil data per baris lalu masukkan ke tempat penampungan
                 array_push($result, array(
-                    'laba' => $row['laba']
+                    'laba' => $row['laba'],
+                    'sisastok' => $row['sisastok']
                 ));
             };
 
