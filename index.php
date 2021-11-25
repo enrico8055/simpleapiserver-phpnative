@@ -305,6 +305,24 @@
                 array('result' => 'success')
             );
         }
+    }else if(isset($_GET['action']) && $_GET['action'] == 16 && isset($_GET['namapembeli']) && isset($_GET['hargajual']) && isset($_GET['jumlahbarang']) && isset($_GET['ongkir']) && isset($_GET['id'])){ //UNTUK MEMASUKKAN DATA REKAP KE DB
+        $namapembeli = $_GET['namapembeli'];
+        $hargajual = $_GET['hargajual'];
+        $jumlahbarang = $_GET['jumlahbarang'];
+        $ongkir = $_GET['ongkir'];
+        $id = $_GET['id'];
+
+        $conn->query("INSERT INTO tblRinciRekap(id, namapembeli, jumlahjual, hargajual, ongkir) VALUES (".$id.",'".$namapembeli."', ".$jumlahbarang.",".$hargajual.",".$ongkir.")");
+
+        if($conn -> error != null){ //kalo query nya ada error
+            echo json_encode(
+                array('result' => 'query failed')
+            );
+        }else{ //kalo query berhasil
+            echo json_encode(
+                array('result' => 'success')
+            );
+        }
     }else{ //KALO USER KIRIM PARAMETER GAK JELAS
         echo json_encode(
             array('result' => 'access not permitted')
