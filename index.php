@@ -310,7 +310,10 @@
         $ongkir = $_GET['ongkir'];
         $id = $_GET['id'];
 
-        $conn->query("INSERT INTO tblPenjualan(id, namapembeli, jumlahjual, hargajual, ongkos) VALUES (".$id.",'".$namapembeli."', ".$jumlahbarang.",".$hargajual.",".$ongkir.")");
+        date_default_timezone_set('Asia/Jakarta');
+        $dateSekarang = date("d/m/Y");
+
+        $conn->query("INSERT INTO tblPenjualan(id, namapembeli, tanggal, jumlahjual, hargajual, ongkos) VALUES (".$id.",'".$namapembeli."','".$dateSekarang."',".$jumlahbarang.",".$hargajual.",".$ongkir.")");
 
         if($conn -> error != null){ //kalo query nya ada error
             echo json_encode(
