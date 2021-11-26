@@ -292,7 +292,7 @@
         date_default_timezone_set('Asia/Jakarta');
         $dateSekarang = date("d/m/Y");
 
-        $conn->query("INSERT INTO tblRekap(id, tanggal, jumlahbarang, hargabarang) VALUES (".$_GET['id'].",'".$dateSekarang."', ".$jmlBarang.",".$hargaBarang.")");
+        $conn->query("INSERT INTO tblKulakan(id, namasupplier, tanggal, jumlahbarang, hargabarang) VALUES (".$_GET['id'].",'tes','".$dateSekarang."', ".$jmlBarang.",".$hargaBarang.")");
 
         if($conn -> error != null){ //kalo query nya ada error
             echo json_encode(
