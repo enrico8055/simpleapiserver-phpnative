@@ -310,7 +310,7 @@
         $ongkir = $_GET['ongkir'];
         $id = $_GET['id'];
 
-        $conn->query("INSERT INTO tblRinciRekap(id, namapembeli, jumlahjual, hargajual, ongkir) VALUES (".$id.",'".$namapembeli."', ".$jumlahbarang.",".$hargajual.",".$ongkir.")");
+        $conn->query("INSERT INTO tblPenjualan(id, namapembeli, jumlahjual, hargajual, ongkos) VALUES (".$id.",'".$namapembeli."', ".$jumlahbarang.",".$hargajual.",".$ongkir.")");
 
         if($conn -> error != null){ //kalo query nya ada error
             echo json_encode(
