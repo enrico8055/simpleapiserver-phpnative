@@ -303,17 +303,15 @@
                 array('result' => 'success')
             );
         }
-    }else if(isset($_GET['action']) && $_GET['action'] == 16 && isset($_GET['namapembeli']) && isset($_GET['hargajual']) && isset($_GET['jumlahbarang']) && isset($_GET['ongkir']) && isset($_GET['id'])){ //UNTUK MEMASUKKAN DATA REKAP KE DB
+    }else if(isset($_GET['action']) && $_GET['action'] == 16 && isset($_GET['namapembeli']) && isset($_GET['hargajual']) && isset($_GET['jumlahbarang']) && isset($_GET['ongkir']) && isset($_GET['id']) && isset($_GET['tanggal'])){ //UNTUK MEMASUKKAN DATA REKAP KE DB
         $namapembeli = $_GET['namapembeli'];
         $hargajual = $_GET['hargajual'];
         $jumlahbarang = $_GET['jumlahbarang'];
         $ongkir = $_GET['ongkir'];
         $id = $_GET['id'];
+        $tanggal = $_GET['tanggal'];
 
-        date_default_timezone_set('Asia/Jakarta');
-        $dateSekarang = date("d/m/Y");
-
-        $conn->query("INSERT INTO tblPenjualan(id, namapembeli, tanggal, jumlahjual, hargajual, ongkos) VALUES (".$id.",'".$namapembeli."','".$dateSekarang."',".$jumlahbarang.",".$hargajual.",".$ongkir.")");
+        $conn->query("INSERT INTO tblPenjualan(id, namapembeli, tanggal, jumlahjual, hargajual, ongkos) VALUES (".$id.",'".$namapembeli."','".$tanggal."',".$jumlahbarang.",".$hargajual.",".$ongkir.")");
 
         if($conn -> error != null){ //kalo query nya ada error
             echo json_encode(
