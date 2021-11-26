@@ -252,6 +252,7 @@
             while($row = $getData -> fetch_assoc()){ //kita ambil data per baris lalu masukkan ke tempat penampungan
                 array_push($result, array(
                     'id' => $row['id'],
+                    'namasupplier' => $row['namasupplier'],
                     'jumlahbarang' => $row['jumlahbarang'],
                     'hargabarang' => $row['hargabarang'],
                     'tanggal' => $row['tanggal']
