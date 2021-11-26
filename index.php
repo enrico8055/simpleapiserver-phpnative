@@ -239,8 +239,8 @@
                 array('result' => 'success')
             );
         }
-    }else if(isset($_GET['action']) && $_GET['action'] == 13 ){ //UNTUK AMBIL DATA REKAP DARI DB
-        $getData = $conn->query("SELECT * FROM tblKulakan order by no desc"); //ambil semua data dari db
+    }else if(isset($_GET['action']) && $_GET['action'] == 13 && isset($_GET['id'])){ //UNTUK AMBIL DATA REKAP DARI DB
+        $getData = $conn->query("SELECT * FROM tblKulakan where id = ".$_GET['id']." order by no desc"); //ambil semua data dari db
         
         if($getData -> num_rows == 0){
             echo json_encode(
