@@ -286,15 +286,13 @@
                 array('result' => $result)
             );
         }
-    }else if(isset($_GET['action']) && $_GET['action'] == 15 && isset($_GET['jmlBarang']) && isset($_GET['hargaBarang']) && isset($_GET['id']) && isset($_GET['namasupplier'])){ //UNTUK MEMASUKKAN DATA REKAP KE DB
+    }else if(isset($_GET['action']) && $_GET['action'] == 15 && isset($_GET['jmlBarang']) && isset($_GET['hargaBarang']) && isset($_GET['id']) && isset($_GET['namasupplier']) && isset($_GET['tanggal'])){ //UNTUK MEMASUKKAN DATA REKAP KE DB
         $jmlBarang = $_GET['jmlBarang'];
         $hargaBarang = $_GET['hargaBarang'];
         $namasupplier = $_GET['namasupplier'];
-        
-        date_default_timezone_set('Asia/Jakarta');
-        $dateSekarang = date("d/m/Y");
+        $tanggal = $_GET['tanggal'];
 
-        $conn->query("INSERT INTO tblKulakan(id, namasupplier, tanggal, jumlahbarang, hargabarang) VALUES (".$_GET['id'].",'".$namasupplier."','".$dateSekarang."', ".$jmlBarang.",".$hargaBarang.")");
+        $conn->query("INSERT INTO tblKulakan(id, namasupplier, tanggal, jumlahbarang, hargabarang) VALUES (".$_GET['id'].",'".$namasupplier."','".$tanggal."', ".$jmlBarang.",".$hargaBarang.")");
 
         if($conn -> error != null){ //kalo query nya ada error
             echo json_encode(
