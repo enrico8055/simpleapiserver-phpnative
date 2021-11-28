@@ -208,15 +208,6 @@
                 'total' => $result2['total']
             ))
         );
-    }else if(isset($_GET['action']) && $_GET['action'] == 11 && isset($_GET['id'])){ //AMBIL TOTAL TABUNGAN
-        $id = $_GET['id'];
-
-        $jumlah = $conn->query("SELECT SUM(jumlah) as total FROM tblRinciTabungan WHERE id =".$id);
-        $result2 = $jumlah -> fetch_assoc();
-
-        echo json_encode( 
-            array('result' => $result2['total'])
-        );
     }else if(isset($_GET['action']) && $_GET['action'] == 12 && isset($_GET['id']) && isset($_GET['jumlah']) && isset($_GET['tanggal'])){ //UNTUK MEMASUKKAN DATA rinci tabungan
         $id = $_GET['id'];
         $jumlah = $_GET['jumlah'];
