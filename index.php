@@ -93,7 +93,7 @@
         echo json_encode( 
             array('result' => array(
                 'sisa' => $result1['saldo'] - $result2['total'],
-                'total' => $result2
+                'total' => $result2['total']
             ))
         );
     }else if(isset($_GET['action']) && $_GET['action'] == 6 && isset($_GET['tanggal']) && isset($_GET['query'])){ //UNTUK REQ DATA BERDASAR QUERY TANGGAL
