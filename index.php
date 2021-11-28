@@ -389,7 +389,7 @@
         $totalmenang = $_GET['totalmenang'];
         $tanggal = $_GET['tanggal'];
 
-        $conn->query("INSERT INTO tblPenjualan(pemain, tanggal, totalmenang, id) VALUES ('".$pemain."','".$tanggal."',".$totalmenang.",".$jenis.")");
+        $conn->query("INSERT INTO tblDataKerja(pemain, tanggal, totalmenang, id) VALUES ('".$pemain."','".$tanggal."',".$totalmenang.",".$jenis.")");
 
         if($conn -> error != null){ //kalo query nya ada error
             echo json_encode(
