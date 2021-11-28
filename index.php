@@ -171,9 +171,17 @@
                 array('result' => $result)
             );
         }
-    }else if(isset($_GET['action']) && $_GET['action'] == 9 && isset($_GET['id'])){ //AMBIL TOTAL TABUNGAN BERDASAR JENIS TABUNGAN
-        $getData = $conn->query("SELECT * FROM tblRinciTabungan WHERE id=".$_GET['id']); //ambil semua data dari db
+    }else if(isset($_GET['action']) && $_GET['action'] == 10 && isset($_GET['id'])){ //AMBIL KURAN GBRP PERSEN TABUNGAN KE TARGET
+        $id = $_GET['id'];
+
+        $getData = $conn->query("SELECT * FROM tblRinciTabungan WHERE id=".$_GET['id']);
         
+        $target = $conn->query("SELECT target FROM tblTabungan WHERE id =".$id);
+        $result1 = $target -> fetch_assoc();
+
+        $jumlah = $conn->query("SELECT SUM(jumlah) as total FROM tblRinciTabungan WHERE id =".$id);
+        $result2 = $jumlah -> fetch_assoc();
+
         if($getData -> num_rows == 0){
             echo json_encode(
                 array('result' => 'no data')
@@ -188,24 +196,13 @@
                     'tanggal' => $row['tanggal']
                 ));
             };
-
-            echo json_encode( //return/ kembalikan data di penampungan berupa json result
-                array('result' => $result)
-            );
         }
-    }else if(isset($_GET['action']) && $_GET['action'] == 10 && isset($_GET['id'])){ //AMBIL KURAN GBRP PERSEN TABUNGAN KE TARGET
-        $id = $_GET['id'];
-        
-        $target = $conn->query("SELECT target FROM tblTabungan WHERE id =".$id);
-        $result1 = $target -> fetch_assoc();
-
-        $jumlah = $conn->query("SELECT SUM(jumlah) as total FROM tblRinciTabungan WHERE id =".$id);
-        $result2 = $jumlah -> fetch_assoc();
 
         echo json_encode( 
             array('result' => array(
                 'persen' => 1-($result1['target'] - $result2['total'])/$result1['target'],
-                'total' => $result2['total']
+                'total' => $result2['total'],
+                'rincitabungan' => $result
             ))
         );
     }else if(isset($_GET['action']) && $_GET['action'] == 12 && isset($_GET['id']) && isset($_GET['jumlah']) && isset($_GET['tanggal'])){ //UNTUK MEMASUKKAN DATA rinci tabungan
