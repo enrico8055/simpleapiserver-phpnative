@@ -91,7 +91,10 @@
         $result2 = $getData2 -> fetch_assoc();
 
         echo json_encode( 
-            array('result' => $result1['saldo'] - $result2['total'])
+            array('result' => array(
+                'sisa' => $result1['saldo'] - $result2['total'],
+                'total' => $result2
+            ))
         );
     }else if(isset($_GET['action']) && $_GET['action'] == 6 && isset($_GET['tanggal']) && isset($_GET['query'])){ //UNTUK REQ DATA BERDASAR QUERY TANGGAL
         $tanggal = $_GET['tanggal'];
