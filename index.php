@@ -383,6 +383,23 @@
                 array('result' => $result)
             );
         }
+    }else if(isset($_GET['action']) && $_GET['action'] == 21 && isset($_GET['pemain']) && isset($_GET['jenis']) && isset($_GET['totalmenang'])&& isset($_GET['tanggal'])){ //UNTUK MEMASUKKAN DATA REKAP KE DB
+        $pemain = $_GET['pemain'];
+        $jenis = $_GET['jenis'];
+        $totalmenang = $_GET['totalmenang'];
+        $tanggal = $_GET['tanggal'];
+
+        $conn->query("INSERT INTO tblPenjualan(pemain, tanggal, totalmenang, id) VALUES ('".$pemain."','".$tanggal."',".$totalmenang.",".$jenis.")");
+
+        if($conn -> error != null){ //kalo query nya ada error
+            echo json_encode(
+                array('result' => 'query failed')
+            );
+        }else{ //kalo query berhasil
+            echo json_encode(
+                array('result' => 'success')
+            );
+        }
     }else{ //KALO USER KIRIM PARAMETER GAK JELAS
         echo json_encode(
             array('result' => 'access not permitted')
