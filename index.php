@@ -368,8 +368,7 @@
 
         $sgp = $conn->query("SELECT sum(totalmenang) as totalmenang FROM tblDataKerja where tanggal between '".$_GET['daritanggal']."' and '".$_GET['sampaitanggal']."' and id = 1 and pemain = '".$_GET['pemain']."'"); 
 
-        $hk = $conn->query("SELECT sum(totalmenang) as totalmenang FROM tblDataKerja where tanggal between '".$_GET['daritanggal']."' and '".$_GET['sampaitanggal']."' and id = 2 and pemain = '".$_GET['pemain']."'"); 
-        var_dump($sgp->fetch_assoc()['totalmenang']);
+        $hk = $conn->query("SELECT sum(totalmenang) as totalmenang FROM tblDataKerja where tanggal between '".$_GET['daritanggal']."' and '".$_GET['sampaitanggal']."' and id = 2 and pemain = '".$_GET['pemain']."'");
         if($getData -> num_rows == 0){
             echo json_encode(
                 array('result' => 'no data')
@@ -380,6 +379,7 @@
             while($row = $getData -> fetch_assoc()){ //kita ambil data per baris lalu masukkan ke tempat penampungan
                 array_push($result, array(
                     'totalmenang' => $row['totalmenang'],
+                    'sgphk' => ($sgp->fetch_assoc()['totalmenang']) + ($hk->fetch_assoc()['totalmenang'])
                 ));
             };
 
