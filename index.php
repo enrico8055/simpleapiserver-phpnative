@@ -74,17 +74,14 @@
     }else if(isset($_GET['action']) && $_GET['action'] == 5 && isset($_GET['tanggal'])){ //AMBIL SISA UANG DARI SALDO - PENGELUARAN
         $tanggal = $_GET['tanggal'];
         
-        $getData1 = $conn->query("SELECT saldo, (SELECT SUM(harga) FROM tblPengeluaran WHERE tanggal ='".$tanggal."') as total FROM tblPemasukan WHERE tanggal ='".$tanggal."'");
-        $result1 = $getData1 -> fetch_assoc();
-
-        // $getData2 = $conn->query("SELECT SUM(harga) as total FROM tblPengeluaran WHERE tanggal ='".$tanggal."'");
-        // $result2 = $getData2 -> fetch_assoc();
+        $getData = $conn->query("SELECT saldo, (SELECT SUM(harga) FROM tblPengeluaran WHERE tanggal ='".$tanggal."') as total FROM tblPemasukan WHERE tanggal ='".$tanggal."'");
+        $result = $getData -> fetch_assoc();
 
         echo json_encode( 
             array('result' => array(
-                'sisa' => $result1['saldo'] - $result1['total'],
-                'total' => $result1['total'],
-                'saldo' => $result1['saldo']
+                'sisa' => $result['saldo'] - $result['total'],
+                'total' => $result['total'],
+                'saldo' => $result['saldo']
             ))
         );
     }else if(isset($_GET['action']) && $_GET['action'] == 6 && isset($_GET['tanggal']) && isset($_GET['query'])){ //UNTUK REQ DATA BERDASAR QUERY TANGGAL
@@ -206,7 +203,10 @@
         $result2 = $jumlah -> fetch_assoc();
 
         echo json_encode( 
-            array('result' => (1-($result1['target'] - $result2['total'])/$result1['target']))
+            array('result' => array(
+                'persen' => 1-($result1['target'] - $result2['total'])/$result1['target'],
+                'total' => $result2['total']
+            ))
         );
     }else if(isset($_GET['action']) && $_GET['action'] == 11 && isset($_GET['id'])){ //AMBIL TOTAL TABUNGAN
         $id = $_GET['id'];
