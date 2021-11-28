@@ -74,16 +74,16 @@
     }else if(isset($_GET['action']) && $_GET['action'] == 5 && isset($_GET['tanggal'])){ //AMBIL SISA UANG DARI SALDO - PENGELUARAN
         $tanggal = $_GET['tanggal'];
         
-        $getData1 = $conn->query("SELECT saldo FROM tblPemasukan WHERE tanggal ='".$tanggal."'");
+        $getData1 = $conn->query("SELECT saldo, (SELECT SUM(harga) FROM tblPengeluaran WHERE tanggal ='".$tanggal."') as total FROM tblPemasukan WHERE tanggal ='".$tanggal."'");
         $result1 = $getData1 -> fetch_assoc();
 
-        $getData2 = $conn->query("SELECT SUM(harga) as total FROM tblPengeluaran WHERE tanggal ='".$tanggal."'");
-        $result2 = $getData2 -> fetch_assoc();
+        // $getData2 = $conn->query("SELECT SUM(harga) as total FROM tblPengeluaran WHERE tanggal ='".$tanggal."'");
+        // $result2 = $getData2 -> fetch_assoc();
 
         echo json_encode( 
             array('result' => array(
-                'sisa' => $result1['saldo'] - $result2['total'],
-                'total' => $result2['total'],
+                'sisa' => $result1['saldo'] - $result1['total'],
+                'total' => $result1['total'],
                 'saldo' => $result1['saldo']
             ))
         );
