@@ -1,34 +1,7 @@
 <?php
     $conn = new mysqli("remotemysql.com:3306", "Kc4FegeTMa", "RR7CK8JY96", "Kc4FegeTMa"); //connect ke database
 
-    if(isset($_GET['action']) && $_GET['action'] == 1 && isset($_GET['tanggal'])){ //UNTUK AMBIL DATA DARI DB
-        $tanggal = $_GET['tanggal'];
-
-        $getData = $conn->query("SELECT * FROM tblPengeluaran WHERE tanggal ='".$tanggal."' order by id desc"); //ambil semua data dari db
-        
-        if($getData -> num_rows == 0){
-            echo json_encode(
-                array('result' => 'no data')
-            );
-        }else{
-            $result = array(); //tempat menampung semua data
-
-            while($row = $getData -> fetch_assoc()){ //kita ambil data per baris lalu masukkan ke tempat penampungan
-                array_push($result, array(
-                    'id' => $row['id'],
-                    'tanggal' => $row['tanggal'],
-                    'jenis' => $row['jenis'],
-                    'harga' => $row['harga'],
-                    'user' => $row['user'],
-                    'waktuProses' => $row['waktuProses']
-                ));
-            };
-
-            echo json_encode( //return/ kembalikan data di penampungan berupa json result
-                array('result' => $result)
-            );
-        }
-    }else if(isset($_GET['action']) && $_GET['action'] == 2 && isset($_GET['tanggal']) && isset($_GET['jenis']) && isset($_GET['harga']) && isset($_GET['user'])){ //UNTUK MEMASUKKAN DATA KE DB PENGELUARAN
+    if(isset($_GET['action']) && $_GET['action'] == 2 && isset($_GET['tanggal']) && isset($_GET['jenis']) && isset($_GET['harga']) && isset($_GET['user'])){ //UNTUK MEMASUKKAN DATA KE DB PENGELUARAN
         $tanggal = $_GET['tanggal'];
         $jenis = $_GET['jenis'];
         $harga = $_GET['harga'];
@@ -73,6 +46,27 @@
         }
     }else if(isset($_GET['action']) && $_GET['action'] == 5 && isset($_GET['tanggal'])){ //AMBIL SISA UANG DARI SALDO - PENGELUARAN
         $tanggal = $_GET['tanggal'];
+
+        $getData1 = $conn->query("SELECT * FROM tblPengeluaran WHERE tanggal ='".$tanggal."' order by id desc"); //ambil semua data dari db
+        
+        if($getData1 -> num_rows == 0){
+            echo json_encode(
+                array('result' => 'no data')
+            );
+        }else{
+            $result1 = array(); //tempat menampung semua data
+
+            while($row = $getData1 -> fetch_assoc()){ //kita ambil data per baris lalu masukkan ke tempat penampungan
+                array_push($result1, array(
+                    'id' => $row['id'],
+                    'tanggal' => $row['tanggal'],
+                    'jenis' => $row['jenis'],
+                    'harga' => $row['harga'],
+                    'user' => $row['user'],
+                    'waktuProses' => $row['waktuProses']
+                ));
+            };
+        }
         
         $getData = $conn->query("SELECT saldo, (SELECT SUM(harga) FROM tblPengeluaran WHERE tanggal ='".$tanggal."') as total FROM tblPemasukan WHERE tanggal ='".$tanggal."'");
         $result = $getData -> fetch_assoc();
@@ -81,7 +75,8 @@
             array('result' => array(
                 'sisa' => $result['saldo'] - $result['total'],
                 'total' => $result['total'],
-                'saldo' => $result['saldo']
+                'saldo' => $result['saldo'],
+                'rincikeuangan' => $result1
             ))
         );
     }else if(isset($_GET['action']) && $_GET['action'] == 6 && isset($_GET['tanggal']) && isset($_GET['query'])){ //UNTUK REQ DATA BERDASAR QUERY TANGGAL
