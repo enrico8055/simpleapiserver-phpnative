@@ -71,16 +71,6 @@
                 array('result' => $result)
             );
         }
-    }else if(isset($_GET['action']) && $_GET['action'] == 4 && isset($_GET['tanggal'])){
-        $tanggal = $_GET['tanggal'];
-        
-        $getData = $conn->query("SELECT SUM(harga) as total FROM tblPengeluaran WHERE tanggal ='".$tanggal."'");
-
-        $result = $getData -> fetch_assoc();
-
-        echo json_encode( 
-            array('result' => $result)
-        );
     }else if(isset($_GET['action']) && $_GET['action'] == 5 && isset($_GET['tanggal'])){ //AMBIL SISA UANG DARI SALDO - PENGELUARAN
         $tanggal = $_GET['tanggal'];
         
@@ -93,7 +83,8 @@
         echo json_encode( 
             array('result' => array(
                 'sisa' => $result1['saldo'] - $result2['total'],
-                'total' => $result2['total']
+                'total' => $result2['total'],
+                'saldo' => $result1['saldo']
             ))
         );
     }else if(isset($_GET['action']) && $_GET['action'] == 6 && isset($_GET['tanggal']) && isset($_GET['query'])){ //UNTUK REQ DATA BERDASAR QUERY TANGGAL
