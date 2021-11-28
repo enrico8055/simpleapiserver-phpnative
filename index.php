@@ -405,6 +405,20 @@
                 array('result' => 'success')
             );
         }
+    }else if(isset($_GET['action']) && $_GET['action'] == 22 && isset($_GET['no'])){ //UNTUK MEMASUKKAN DATA REKAP KE DB
+        $no = $_GET['no'];
+
+        $conn->query("delete from tblDataKerja where no = ".$no);
+
+        if($conn -> error != null){ //kalo query nya ada error
+            echo json_encode(
+                array('result' => $conn->error)
+            );
+        }else{ //kalo query berhasil
+            echo json_encode(
+                array('result' => 'success')
+            );
+        }
     }else{ //KALO USER KIRIM PARAMETER GAK JELAS
         echo json_encode(
             array('result' => 'access not permitted')
