@@ -364,7 +364,11 @@
             );
         }
     }else if(isset($_GET['action']) && $_GET['action'] == 20 && isset($_GET['jenis']) && isset($_GET['pemain']) && isset($_GET['daritanggal']) && isset($_GET['sampaitanggal'])){ //UNTUK AMBIL DATA REKAP DARI DB
-        $getData = $conn->query("SELECT sum(totalmenang) as totalmenang FROM tblDataKerja where tanggal between '".$_GET['daritanggal']."' and '".$_GET['sampaitanggal']."' and id = ".$_GET['jenis']." and pemain = '".$_GET['pemain']."'"); //ambil semua data dari db
+        $getData = $conn->query("SELECT sum(totalmenang) as totalmenang FROM tblDataKerja where tanggal between '".$_GET['daritanggal']."' and '".$_GET['sampaitanggal']."' and id = ".$_GET['jenis']." and pemain = '".$_GET['pemain']."'");
+
+        $sgp = $conn->query("SELECT sum(totalmenang) as totalmenang FROM tblDataKerja where tanggal between '".$_GET['daritanggal']."' and '".$_GET['sampaitanggal']."' and id = 1 and pemain = '".$_GET['pemain']."'"); 
+
+        $hk = $conn->query("SELECT sum(totalmenang) as totalmenang FROM tblDataKerja where tanggal between '".$_GET['daritanggal']."' and '".$_GET['sampaitanggal']."' and id = 2 and pemain = '".$_GET['pemain']."'"); 
         
         if($getData -> num_rows == 0){
             echo json_encode(
@@ -375,7 +379,8 @@
 
             while($row = $getData -> fetch_assoc()){ //kita ambil data per baris lalu masukkan ke tempat penampungan
                 array_push($result, array(
-                    'totalmenang' => $row['totalmenang']
+                    'totalmenang' => $row['totalmenang'],
+                    'sgphk' => $sgp['totalmenang'] + $hl['totalmenang']
                 ));
             };
 
