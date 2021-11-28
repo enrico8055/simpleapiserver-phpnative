@@ -380,7 +380,6 @@
             while($row = $getData -> fetch_assoc()){ //kita ambil data per baris lalu masukkan ke tempat penampungan
                 array_push($result, array(
                     'totalmenang' => $row['totalmenang'],
-                    'sgphk' => $sgp['totalmenang'] + $hl['totalmenang']
                 ));
             };
 
