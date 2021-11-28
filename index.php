@@ -320,7 +320,7 @@
             );
         }
     }else if(isset($_GET['action']) && $_GET['action'] == 18 ){ //UNTUK AMBIL DATA REKAP DARI DB
-        $getData = $conn->query("SELECT * FROM tblDataKerja"); //ambil semua data dari db
+        $getData = $conn->query("SELECT * FROM tblKerja"); //ambil semua data dari db
         if($getData -> num_rows == 0){
             echo json_encode(
                 array('result' => 'no data')
