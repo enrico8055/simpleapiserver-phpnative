@@ -364,7 +364,7 @@
             );
         }
     }else if(isset($_GET['action']) && $_GET['action'] == 20 && isset($_GET['jenis']) && isset($_GET['pemain']) && isset($_GET['daritanggal']) && isset($_GET['sampaitanggal'])){ //UNTUK AMBIL DATA REKAP DARI DB
-        $getData = $conn->query("SELECT sum(totalmenang) FROM tblDataKerja where tanggal between '".$_GET['daritanggal']."' and '".$_GET['sampaitanggal']."' and id = ".$_GET['jenis']." and pemain = '".$_GET['pemain']."'"); //ambil semua data dari db
+        $getData = $conn->query("SELECT sum(totalmenang) as totalmenang FROM tblDataKerja where tanggal between '".$_GET['daritanggal']."' and '".$_GET['sampaitanggal']."' and id = ".$_GET['jenis']." and pemain = '".$_GET['pemain']."'"); //ambil semua data dari db
         
         if($getData -> num_rows == 0){
             echo json_encode(
