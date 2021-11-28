@@ -393,7 +393,7 @@
 
         if($conn -> error != null){ //kalo query nya ada error
             echo json_encode(
-                array('result' => 'query failed')
+                array('result' => $conn->error)
             );
         }else{ //kalo query berhasil
             echo json_encode(
