@@ -369,7 +369,7 @@
         $sgp = $conn->query("SELECT sum(totalmenang) as totalmenang FROM tblDataKerja where tanggal between '".$_GET['daritanggal']."' and '".$_GET['sampaitanggal']."' and id = 1 and pemain = '".$_GET['pemain']."'"); 
 
         $hk = $conn->query("SELECT sum(totalmenang) as totalmenang FROM tblDataKerja where tanggal between '".$_GET['daritanggal']."' and '".$_GET['sampaitanggal']."' and id = 2 and pemain = '".$_GET['pemain']."'"); 
-        var_dump($sgp);
+        var_dump($hk);
         if($getData -> num_rows == 0){
             echo json_encode(
                 array('result' => 'no data')
