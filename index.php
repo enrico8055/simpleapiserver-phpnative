@@ -384,12 +384,12 @@
             );
         }
     }else if(isset($_GET['action']) && $_GET['action'] == 21 && isset($_GET['pemain']) && isset($_GET['jenis']) && isset($_GET['totalmenang'])&& isset($_GET['tanggal'])){ //UNTUK MEMASUKKAN DATA REKAP KE DB
-        $pemain = $_GET['pemain'];
-        $jenis = $_GET['jenis'];
-        $totalmenang = $_GET['totalmenang'];
-        $tanggal = $_GET['tanggal'];
+        $p = $_GET['pemain'];
+        $j = $_GET['jenis'];
+        $t = $_GET['totalmenang'];
+        $g = $_GET['tanggal'];
 
-        $conn->query("INSERT INTO tblDataKerja(pemain, tanggal, totalmenang, id) VALUES ('".$pemain."','".$tanggal."',".$totalmenang.",".$jenis.")");
+        $conn->query("INSERT INTO tblDataKerja(pemain, tanggal, totalmenang, id) VALUES ('".$p."','".$g."',".$t.",".$j.")");
 
         if($conn -> error != null){ //kalo query nya ada error
             echo json_encode(
