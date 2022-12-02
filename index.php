@@ -1,6 +1,6 @@
 <?php
     $conn = new mysqli("remotemysql.com:3306", "Kc4FegeTMa", "RR7CK8JY96", "Kc4FegeTMa"); //connect ke database
-
+ 
     if(isset($_GET['action']) && $_GET['action'] == 2 && isset($_GET['tanggal']) && isset($_GET['jenis']) && isset($_GET['harga']) && isset($_GET['user'])){ //UNTUK MEMASUKKAN DATA KE DB PENGELUARAN
         $tanggal = $_GET['tanggal'];
         $jenis = $_GET['jenis'];
